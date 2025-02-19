@@ -5,18 +5,21 @@ from datetime import date
 
 def admitionhelper(room):
   info = db_interactor.select(room)
-  print(info)
+  current = date.today().strftime("%m/%d/%Y")
+  print(current)
   data ={
+    '[header]': 'Admittion',
+    "[date]": str(current),
     "[first]": info[0],
     "[last]": info[1],
     "[room_dest]": info[2],
     "[id]": info[3],
-    "[name]":info[4],
-    "[date]": date.today().strftime("%m/%d/%Y"),
-    "[level_dest]": "template",
-    "[destination]": "template"
+    "[home]":info[4],
+    "[level_dest]": "we",
+    "[destination]": "win",
+    '[current]': 'Bn'
     }
-  print(data)
+  
   return data
   
 
@@ -24,7 +27,20 @@ def admition(temp_path,storage,room):
  data = admitionhelper(room)
  print(data)
  doc = Document(temp_path)
+ for paragraph in doc.paragraphs:
+   for key, val in data.items():
+     for run in paragraph.runs:
+       run.text = run.text.replace(key,val)
 
+ doc.save(storage)
+ print("save")
+
+def main():
+  
+    #admition()
+ 
+
+main()
 
 
 def main():
