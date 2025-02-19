@@ -8,7 +8,7 @@ import os
 def readconfig():
 
  config = cp.ConfigParser()
- config.read("db.ini")
+ config.read("place holder")
 
  db_params = {
     "host": config["database"]["host"],
